@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <title>Multi-Single Select</title>
+  
+  <script type="text/javascript" src="helpers/jquery-1.3.2.min.js"></script>
+  <script type="text/javascript" src="multi_single_select.js"></script>
+  <link rel="StyleSheet" type="text/css" href="helpers/example.css" media="screen"/>
+
+  <script type="text/javascript">
+  jQuery(document).ready(function() {
+    $('#whopper').multi_single_select('toppings');
+  });
+  </script>
+
+</head>
+<body>
+
+<h1>Example</h1>
+<p>Starting with this multiple select element with 6 total values, 2 are selected.</p>
+<pre>&lt;select id="whopper" multiple="multiple" size="4"&gt;
+  &lt;option value="mayo"&gt;Mayonnaise&lt;/option&gt;
+  &lt;option value="lett" selected="selected"&gt;Lettuce&lt;/option&gt;
+  &lt;option value="tomo"&gt;Tomatoes&lt;/option&gt;
+  &lt;option value="onin" selected="selected"&gt;Onions&lt;/option&gt;
+  &lt;option value="pckl"&gt;Pickles&lt;/option&gt;
+  &lt;option value="kchp"&gt;Ketchup&lt;/option&gt;
+&lt;/select&gt;</pre>
+<p>Which normally looks like this:</p>
+<select id="xwhopper" multiple="multiple" size="4">
+  <option value="mayo">Mayonnaise</option>
+  <option value="lett" selected="selected">Lettuce</option>
+  <option value="tomo">Tomatoes</option>
+  <option value="onin" selected="selected">Onions</option>
+  <option value="pckl">Pickles</option>
+  <option value="kchp">Ketchup</option>
+</select>
+<p>Adding this unobtrusive Javascript to the header &lt;script&gt;:</p>
+<pre>jQuery(document).ready(function() {
+  $('#whopper').multi_single_select('toppings');
+});
+</pre>
+<p>converts the above element to this (it's a list element with some styles):</p>
+<select id="whopper" multiple="multiple" size="4">
+  <option value="mayo">Mayonnaise</option>
+  <option value="lett" selected="selected">Lettuce</option>
+  <option value="tomo">Tomatoes</option>
+  <option value="onin" selected="selected">Onions</option>
+  <option value="pckl">Pickles</option>
+  <option value="kchp">Ketchup</option>
+</select>
+<p>If the select has a label for it, the header string 'Options...' will be replaced by it</p>
+</body>
