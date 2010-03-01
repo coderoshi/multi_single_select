@@ -13,3 +13,10 @@ ul.toppings li {
   -moz-border-radius:5px;
   -webkit-border-radius:5px;
 }
+ul.toppings li a {
+  text-decoration:none;
+  padding-left:4px;
+  font-size:14px;
+  color:#666;
+  font-family:arial;
+}

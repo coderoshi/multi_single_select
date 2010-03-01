@@ -9,6 +9,37 @@
 // The select header is extracted from the select's label
 // for - if it exists. Otherwise it just prints 'Options...'
 (function(){
+  multi_single_select_remove = function(scccis_id, list_class_name, name, val)
+  {
+    $("#"+scccis_id+" optgroup.remove option").each(function(i, opt) {
+      var selected = $(opt);
+      // var span = selected.val(); //.find('span');
+      // alert(selected);
+      if( selected.val() == val) {
+        // opt.remove();
+        selected.removeAttr('selected');
+        selected.removeAttr('class');
+        var add_group = $("#"+scccis_id+" optgroup.add");
+        add_group.append(selected);
+      }
+    });
+    
+    $("ul."+list_class_name+" li").each(function(i, li) {
+      li = $(li);
+      var span = li.find('span');
+      if( span.html() == name) {
+        li.remove();
+      }
+    });
+    
+    $("span."+list_class_name+" input").each(function(i, input) {
+      input = $(input);
+      if( input.val() == val) {
+        input.remove();
+      }
+    });
+  }
+  
   $.fn.multi_single_select = function(list_class_name, title) {
     var scccis = this;
     
@@ -26,8 +57,8 @@
     var scccis_name = scccis.attr('name');
     scccis.removeAttr('name');
     
-    var add_group = $("<optgroup></optgroup>").attr('label', 'Add ' + title);
-    var remove_group = $("<optgroup></optgroup>").attr('label', 'Remove ' + title);
+    var add_group = $("<optgroup class='add'></optgroup>").attr('label', 'Add ' + title);
+    var remove_group = $("<optgroup class='remove'></optgroup>").attr('label', 'Remove ' + title);
     scccis.append(add_group);
     scccis.append(remove_group);
     
@@ -45,8 +76,8 @@
         remove_group.append(selected);
         selected.removeAttr('selected');
         selected.attr('class', 'removable');
-      
-        category_list.append("<li>"+selected.html()+"</li>");
+        
+        category_list.append("<li><span>"+selected.html()+"</span><a href=\"javascript:multi_single_select_remove('"+scccis_id+"','"+list_class_name+"','"+selected.html()+"','"+selected.val()+"')\">x</a></li>");
         category_data.append("<input type='hidden' name='"+scccis_name+"' value='"+selected.val()+"' />");
       }
     });
@@ -57,36 +88,27 @@
       var selected = scccis.find(':selected');
     
       if( selected.val() == "0" ) return;
-    
+      
       if( selected.attr('class') == 'removable' )
       {
-        selected.removeAttr('selected');
-        selected.removeAttr('class');
-        add_group.append(selected);
-      
+        // selected.removeAttr('selected');
+        // selected.removeAttr('class');
+        // add_group.append(selected);
+        
         var name = selected.html();
         var val = selected.val();
-      
-        $("ul."+list_class_name+" li").each(function(i, li){
-          li = $(li)
-          if( li.html() == name) {
-            li.remove();
-          }
-        });
-        $("span."+list_class_name+" input").each(function(i, input){
-          input = $(input)
-          if( input.val() == val) {
-            input.remove();
-          }
-        });
+        
+        multi_single_select_remove(scccis_id, list_class_name, name, val);
       }
       else
       {
         selected.removeAttr('selected');
         selected.attr('class', 'removable');
         remove_group.append(selected);
-      
-        category_list.append("<li>"+selected.html()+"</li>");
+        
+        category_list.append("<li><span>"+selected.html()+"</span><a href=\"javascript:multi_single_select_remove('"+scccis_id+"','"+list_class_name+"','"+selected.html()+"','"+selected.val()+"')\">x</a></li>");
+        // category_list.append("<li><span>"+selected.html()+"</span><a href='javascript:multi_single_select_remove(0)'>x</a></li>");
+        // category_list.append("<li>"+selected.html()+"</li>");
         category_data.append("<input type='hidden' name='"+scccis_name+"' value='"+selected.val()+"' />");
       }
     
