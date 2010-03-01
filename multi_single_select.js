@@ -13,10 +13,7 @@
   {
     $("#"+scccis_id+" optgroup.remove option").each(function(i, opt) {
       var selected = $(opt);
-      // var span = selected.val(); //.find('span');
-      // alert(selected);
       if( selected.val() == val) {
-        // opt.remove();
         selected.removeAttr('selected');
         selected.removeAttr('class');
         var add_group = $("#"+scccis_id+" optgroup.add");
@@ -91,10 +88,6 @@
       
       if( selected.attr('class') == 'removable' )
       {
-        // selected.removeAttr('selected');
-        // selected.removeAttr('class');
-        // add_group.append(selected);
-        
         var name = selected.html();
         var val = selected.val();
         
@@ -107,8 +100,6 @@
         remove_group.append(selected);
         
         category_list.append("<li><span>"+selected.html()+"</span><a href=\"javascript:multi_single_select_remove('"+scccis_id+"','"+list_class_name+"','"+selected.html()+"','"+selected.val()+"')\">x</a></li>");
-        // category_list.append("<li><span>"+selected.html()+"</span><a href='javascript:multi_single_select_remove(0)'>x</a></li>");
-        // category_list.append("<li>"+selected.html()+"</li>");
         category_data.append("<input type='hidden' name='"+scccis_name+"' value='"+selected.val()+"' />");
       }
     
