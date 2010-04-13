@@ -9,15 +9,37 @@
 // The select header is extracted from the select's label
 // for - if it exists. Otherwise it just prints 'Options...'
 (function(){
-  multi_single_select_remove = function(scccis_id, list_class_name, name, val)
-  {
+  multi_single_select_data = {}
+  
+  multi_single_select_remove = function(scccis_id, list_class_name, name, val) {
     $("#"+scccis_id+" optgroup.remove option").each(function(i, opt) {
       var selected = $(opt);
       if( selected.val() == val) {
         selected.removeAttr('selected');
         selected.removeAttr('class');
         var add_group = $("#"+scccis_id+" optgroup.add");
-        add_group.append(selected);
+        
+        // paste the selected option in the correct location
+        // iterate through the data and find the current match.
+        // find the next add_group item and prepend
+        var found_val = false;
+        var next_add_group_val = null;
+        var data = multi_single_select_data[scccis_id];
+        for(var i=0; i < data.length; i++) {
+          if(found_val && !next_add_group_val) {
+            next_add_group_val = add_group.find("option[value='"+data[i]+"']");
+            if(next_add_group_val.length != 0) break;
+          } else {
+            if(data[i] == val) {
+              found_val = true;
+            }
+          }
+        }
+        if(!next_add_group_val || next_add_group_val.length == 0) {
+          add_group.append(selected);
+        } else {
+          next_add_group_val.before(selected);
+        }
       }
     });
     
@@ -64,9 +86,12 @@
     scccis.after(category_list)
     scccis.after(category_data)
     
+    multi_single_select_data[scccis_id] = []
+    
     // remove each selected and push to end
     scccis.find('option').each(function(i,selected){
       selected = $(selected)
+      multi_single_select_data[scccis_id].push(selected.val());
       if( !selected.attr('selected') ) {
         add_group.append(selected);
       } else {
