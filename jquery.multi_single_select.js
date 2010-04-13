@@ -62,6 +62,7 @@
   jQuery.fn.multi_single_select = function(settings) {
     
     this.each(function() {
+      if(!settings) settings = {};
       var list_class_name = settings.list_class;
       var title = settings.title;
       
