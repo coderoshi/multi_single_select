@@ -43,7 +43,7 @@
       }
     });
     
-    $("ul."+list_class_name+" li").each(function(i, li) {
+    $("#"+scccis_id + "~ ul."+list_class_name+" li").each(function(i, li) {
       li = $(li);
       var span = li.find('span');
       if( span.html() == name) {
@@ -51,7 +51,7 @@
       }
     });
     
-    $("span."+list_class_name+" input").each(function(i, input) {
+    $("#"+scccis_id + "~ span."+list_class_name+" input").each(function(i, input) {
       input = $(input);
       if( input.val() == val) {
         input.remove();
