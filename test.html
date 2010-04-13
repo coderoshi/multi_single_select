@@ -4,12 +4,12 @@
   <title>Multi-Single Select</title>
   
   <script type="text/javascript" src="helpers/jquery-1.3.2.min.js"></script>
-  <script type="text/javascript" src="multi_single_select.js"></script>
+  <script type="text/javascript" src="jquery.multi_single_select.js"></script>
   <link rel="StyleSheet" type="text/css" href="helpers/example.css" media="screen"/>
-
+  
   <script type="text/javascript">
   jQuery(document).ready(function() {
-    $('#whopper').multi_single_select('toppings');
+    $('#whopper').multi_single_select({list_class:'toppings', title:'Topping'});
   });
   </script>
 
@@ -37,7 +37,7 @@
 </select>
 <p>Adding this unobtrusive Javascript to the header &lt;script&gt;:</p>
 <pre>jQuery(document).ready(function() {
-  $('#whopper').multi_single_select('toppings');
+  $('#whopper').multi_single_select({list_class:'toppings', title:'Topping'});
 });
 </pre>
 <p>converts the above element to this (it's a list element with some styles):</p>
