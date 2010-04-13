@@ -78,12 +78,12 @@
         category_data.append("<input type='hidden' name='"+scccis_name+"' value='"+selected.val()+"' />");
       }
     });
-  
-    scccis.prepend($("<option>"+option_name+"</option>").attr('class', 'directive').attr('value', '0'));
-  
-    scccis.click(function(e){
-      var selected = scccis.find(':selected');
     
+    scccis.prepend($("<option>"+option_name+"</option>").attr('class', 'directive').attr('value', '0'));
+    
+    scccis.change(function(e){
+      var selected = $(this).find(":selected");
+      
       if( selected.val() == "0" ) return;
       
       if( selected.attr('class') == 'removable' )
